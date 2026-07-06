@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VEXCO Admin</title>
+    <!-- Firebase Libraries -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div id="authArea">
+        <button id="loginBtn">Login to Dispatch Board</button>
+    </div>
+    <div id="adminBoard" style="display:none;">
+        <h1>Vexco Dispatch Queue</h1>
+        <div id="list"></div>
+    </div>
+
+    <script>
+        const config = { /* PASTE YOUR FIREBASE CONFIG HERE */ };
+        firebase.initializeApp(config);
+
+        const loginBtn = document.getElementById('loginBtn');
+        const authArea = document.getElementById('authArea');
+        const adminBoard = document.getElementById('adminBoard');
+
+        // Check who is logged in
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user && user.email === "manningtrenton740@gmail.com") { // ONLY YOU
+                authArea.style.display = 'none';
+                adminBoard.style.display = 'block';
+                loadData();
+            } else {
+                authArea.style.display = 'block';
+                adminBoard.style.display = 'none';
+            }
+        });
+
+        loginBtn.addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithPopup(provider);
+        });
+
+        function loadData() {
+            firebase.firestore().collection("dispatches").onSnapshot(snapshot => {
+                const list = document.getElementById('list');
+                list.innerHTML = "";
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    list.innerHTML += `<p>${data.name} - ${data.location}</p>`;
+                });
+            });
+        }
+    </script>
+</body>
+</html>
