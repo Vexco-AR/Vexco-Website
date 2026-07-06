@@ -5,6 +5,7 @@ const form = document.getElementById('dispatchForm');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     
+    // Using the cleaner, classic-style syntax
     db.collection("dispatches").add({
         name: document.getElementById('name').value,
         location: document.getElementById('location').value,
