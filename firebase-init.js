@@ -13,6 +13,7 @@ const firebaseConfig = {
 };
 
 // Initialize the app
+console.log("Checking API Key:", config.apiKey);
 firebase.initializeApp(firebaseConfig);
 
 // Export the database instance
