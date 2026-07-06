@@ -1,1 +1,31 @@
-code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VEXCO | Hot Springs Dispatch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>VEXCO LLC</h1>
+        <p>Roadside Dispatch - Hot Springs</p>
+    </header>
+
+    <main>
+        <form id="dispatchForm">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="text" id="location" placeholder="Address/Location in Hot Springs" required>
+            <select id="issue">
+                <option value="jumpstart">Dead Battery / Jumpstart</option>
+                <option value="tire">Flat Tire / Change</option>
+                <option value="fuel">Out of Fuel</option>
+                <option value="other">Other</option>
+            </select>
+            <button type="submit">REQUEST ASSISTANCE</button>
+        </form>
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
